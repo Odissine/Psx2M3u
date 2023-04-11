@@ -21,7 +21,7 @@ def list_games(dir, dir_path=None):
             if item.endswith(EXT):
                 
                 # Si fichier contient l'une des valeurs Disc, disc ... etc.
-                if any(fnmatch.fnmatch(item, '*' + disc_string +'*') for disc_string in disc_string_list):
+                if any(fnmatch.fnmatch(item, '*' + disc_string +'*') for disc_string in disc_string_list)  and check_disc_list_title(item):
                     item_path = item
                     if dir_path:
                         item_path = dir_path
@@ -46,6 +46,27 @@ def list_games(dir, dir_path=None):
         list_title[x].sort()
 
     return list_title
+
+
+def check_disc_list_title(item):
+    title = re.split(re_disc_string, item)
+    try:
+        data = int(title[1][0])
+        if data in [1,2,3,4,5,6,7,8,9]:
+            check = True
+    except:
+        check = False
+    if check is False:
+        try:
+            data = int(title[1][1])
+            if data in [1,2,3,4,5,6,7,8,9]:
+                check = True
+        except:
+            check = False
+    else:
+        check = False
+    return check
+
 
 for k ,v in list_games(DIR).items():
     print(k, v)
