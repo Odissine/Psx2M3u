@@ -2,11 +2,11 @@ import os
 import fnmatch
 import re
 
-EXT = ('.cue', '.chd', '.ccd', '.iso')
+EXT = ('.cue', '.chd', '.ccd', '.iso', '.cdi')
 DIR = "."
-re_disc_string = "disc|Disc"
-re_ext = "\.cue|\.chd|\.ccd|\.iso"
-disc_string_list = ["disc","Disc"]
+re_disc_string = "disc|Disc|cd|Cd"
+re_ext = "\.cue|\.chd|\.ccd|\.iso|\.cdi"
+disc_string_list = ["disc","Disc","Cd","cd"]
 
 list_files = []
 list_title = {}
@@ -19,9 +19,8 @@ def list_games(dir, dir_path=None):
         else:
             # Si fichier est une image PSX
             if item.endswith(EXT):
-                
                 # Si fichier contient l'une des valeurs Disc, disc ... etc.
-                if any(fnmatch.fnmatch(item, '*' + disc_string +'*') for disc_string in disc_string_list)  and check_disc_list_title(item):
+                if any(fnmatch.fnmatch(item, '*' + disc_string +'*') for disc_string in disc_string_list)  and check_disc_list_title(item.split(".")[0]):
                     item_path = item
                     if dir_path:
                         item_path = dir_path
@@ -63,14 +62,15 @@ def check_disc_list_title(item):
                 check = True
         except:
             check = False
-    else:
-        check = False
     return check
 
-
+i = 0
 for k ,v in list_games(DIR).items():
     print(k, v)
     file = open(k + ".m3u","w")
     for l in v:
         file.write(l + "\n")
     file.close()
+    i += 1
+
+print(i, "jeux ont été traités !")
