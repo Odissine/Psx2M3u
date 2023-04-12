@@ -4,9 +4,9 @@ import re
 
 EXT = ('.cue', '.chd', '.ccd', '.iso', '.cdi')
 DIR = "."
-re_disc_string = "disc|Disc|cd|Cd"
+re_disc_string = "disc|Disc|cd|Cd|CD"
 re_ext = "\.cue|\.chd|\.ccd|\.iso|\.cdi"
-disc_string_list = ["disc","Disc","Cd","cd"]
+disc_string_list = ["disc","Disc","Cd","cd","CD"]
 
 list_files = []
 list_title = {}
