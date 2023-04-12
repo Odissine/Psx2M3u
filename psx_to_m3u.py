@@ -5,7 +5,7 @@ import re
 EXT = ('.cue', '.chd', '.ccd', '.iso')
 DIR = "."
 re_disc_string = "disc|Disc"
-re_ext = ".cue|.chd|.ccd|.iso"
+re_ext = "\.cue|\.chd|\.ccd|\.iso"
 disc_string_list = ["disc","Disc"]
 
 list_files = []
